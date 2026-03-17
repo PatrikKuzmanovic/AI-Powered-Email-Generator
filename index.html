@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Email Generator</title>
+    <!-- CSS will be applied in Phase 2 -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts for professional typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <h1>EmailFlow AI</h1>
+            <p>Generate professional emails in seconds</p>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <!-- LEFT COLUMN: Input Form -->
+        <section class="form-section">
+            <header class="section-header">
+                <h2>Email Details</h2>
+                <p>Provide context for your email</p>
+            </header>
+            
+            <form id="email-generator-form">
+                <div class="form-group">
+                    <label for="email-type">Email Type</label>
+                    <select id="email-type" name="emailType" required>
+                        <option value="" disabled selected>Select an email type...</option>
+                        <option value="cold_outreach">Cold outreach / Sales email</option>
+                        <option value="customer_support">Customer support response</option>
+                        <option value="follow_up">Follow-up email</option>
+                        <option value="apology">Apology / Problem resolution</option>
+                        <option value="meeting_request">Meeting request</option>
+                        <option value="thank_you">Thank you email</option>
+                        <option value="professional_intro">Professional introduction</option>
+                        <option value="job_application">Job application email</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label for="recipient-name">Recipient Name</label>
+                        <input type="text" id="recipient-name" name="recipientName" placeholder="e.g. John Smith" required>
+                    </div>
+                    
+                    <div class="form-group half-width">
+                        <label for="company-context">Company / Context</label>
+                        <input type="text" id="company-context" name="companyContext" placeholder="e.g. ABC Corp" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="key-points">Key Points to Include</label>
+                    <textarea id="key-points" name="keyPoints" rows="5" placeholder="- Discussed pricing&#10;- Next steps&#10;- Demo request" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label for="tone">Tone</label>
+                        <select id="tone" name="tone" required>
+                            <option value="professional" selected>Professional</option>
+                            <option value="friendly">Friendly</option>
+                            <option value="formal">Formal</option>
+                            <option value="casual">Casual</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group half-width">
+                        <label for="length">Length</label>
+                        <select id="length" name="length" required>
+                            <option value="brief">Brief</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="detailed">Detailed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="generate-btn" class="primary-btn">
+                    <span class="btn-text">Generate Email</span>
+                    <span class="loader hidden" id="generate-loader"></span>
+                </button>
+            </form>
+        </section>
+
+        <!-- RIGHT COLUMN: Generated Output -->
+        <section class="output-section">
+            <header class="section-header">
+                <h2>Generated Email</h2>
+                <div class="header-actions">
+                    <button id="copy-btn" class="icon-btn secondary-btn" disabled>📋 Copy</button>
+                    <button id="edit-btn" class="icon-btn secondary-btn" disabled>✏️ Edit</button>
+                    <button id="regenerate-btn" class="icon-btn secondary-btn" disabled>🔄 Regenerate</button>
+                </div>
+            </header>
+
+            <div class="output-container" id="output-container">
+                <!-- Empty state -->
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon">✉️</div>
+                    <p>Fill out the form and click "Generate Email" to see the magic happen.</p>
+                </div>
+
+                <!-- Generated email state (hidden initially) -->
+                <div class="generated-content hidden" id="generated-content">
+                    <div class="subject-line-container">
+                        <label for="output-subject">Subject</label>
+                        <input type="text" id="output-subject" readonly value="Your generated subject will appear here">
+                    </div>
+                    <div class="email-body-container">
+                        <label for="output-body">Email Body</label>
+                        <textarea id="output-body" readonly>Your generated email body will appear here.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Toast notification for copy status -->
+            <div id="toast-notification" class="toast hidden">
+                Copied to clipboard! ✓
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript will be applied in Phase 3 & 4 -->
+    <!-- <script src="js/ui.js"></script> -->
+    <!-- <script src="js/api.js"></script> -->
+    <!-- <script src="js/app.js"></script> -->
+</body>
+</html>
