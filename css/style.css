@@ -479,6 +479,7 @@ select {
     flex: 1;
     padding: 2rem 2.5rem;
     background: rgba(255, 255, 255, 0.7);
+    overflow-y: auto;
 }
 
 #output-body {
