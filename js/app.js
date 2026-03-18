@@ -42,8 +42,8 @@ class App {
             // Call the Gemini API
             const generatedContent = await this.api.generateEmail(data);
             
-            // 3. Display the response
-            this.ui.displayGeneratedEmail(generatedContent.subject, generatedContent.body);
+            // 3. Display the form data alongside response
+            this.ui.displayGeneratedEmail(generatedContent.subject, generatedContent.body, data);
             
         } catch (error) {
             console.error("Failed to generate email:", error);
