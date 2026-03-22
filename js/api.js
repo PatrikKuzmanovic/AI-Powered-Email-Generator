@@ -3,11 +3,10 @@
  * Handles communication with the Gemini API
  */
 class APIController {
-    constructor() {
-        // Provided API Key for Phase 4
-        this.apiKey = 'AIzaSyAcsZQtAKlWazXm5VD6YLMlXidsSSpO_vM';
-        // Endpoint for Gemini Flash latest version (supports system instructions & JSON)
-        this.endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${this.apiKey}`;
+    constructor() {}
+
+    getEndpoint(apiKey) {
+        return `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
     }
 
     /**
@@ -15,8 +14,9 @@ class APIController {
      * @param {Object} data - The form data
      * @returns {Promise<{subject: string, body: string}>}
      */
-    async generateEmail(data) {
+    async generateEmail(data, apiKey) {
         const prompt = this.constructPrompt(data);
+        const endpoint = this.getEndpoint(apiKey);
 
         const requestBody = {
             contents: [{
@@ -31,7 +31,7 @@ class APIController {
         };
 
         try {
-            const response = await fetch(this.endpoint, {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -24,6 +24,29 @@
     </header>
 
     <main class="app-container">
+        <!-- API Setup Section -->
+        <section class="glass-panel api-setup-card full-width fade-in-up stagger-3" id="api-setup-card">
+            <div class="api-setup-header">
+                <h2>⚙️ API Key Setup <span class="badge">One-time</span></h2>
+                <button type="button" class="collapse-btn" onclick="document.getElementById('api-setup-card').classList.toggle('collapsed')" title="Toggle Setup">↕️</button>
+            </div>
+            <div class="api-setup-body">
+                <p>This demo requires a free Gemini API key to generate emails.</p>
+                <div class="api-instructions">
+                    <p>Don't have an API key? <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-link">Get one free at ai.google.dev</a> (takes 2 minutes).</p>
+                    <p class="text-sm"><em>Your key is stored locally in your browser and only used to call the Gemini API securely.</em></p>
+                </div>
+                <form id="api-key-form" class="api-form">
+                    <div class="api-input-container">
+                        <div class="api-key-icon-outside" title="API Key">🔑</div>
+                        <input type="password" id="api-key-input" class="no-icon" placeholder="Paste your Gemini API key here..." required>
+                    </div>
+                    <button type="submit" id="api-key-save-btn" class="secondary-btn">Save API Key</button>
+                </form>
+                <div id="api-status" class="api-status hidden"></div>
+            </div>
+        </section>
+
         <!-- LEFT COLUMN: Input Form -->
         <section class="glass-panel form-section fade-in-up stagger-3">
             <form id="email-generator-form">

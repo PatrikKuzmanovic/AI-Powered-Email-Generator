@@ -34,6 +34,12 @@ class UIController {
         // Notifications
         this.toast = document.getElementById('toast-notification');
         
+        // API Setup elements
+        this.apiKeyForm = document.getElementById('api-key-form');
+        this.apiKeyInput = document.getElementById('api-key-input');
+        this.apiStatus = document.getElementById('api-status');
+        this.apiSetupCard = document.getElementById('api-setup-card');
+        
         // State
         this.isEditing = false;
         this.isTyping = false;
@@ -51,6 +57,35 @@ class UIController {
                 this.outputTo.textContent = e.target.value || 'Recipient';
             }
         });
+        
+        // API Form handling
+        if (this.apiKeyForm) {
+            this.apiKeyForm.addEventListener('submit', (e) => this.handleApiKeySave(e));
+            this.checkExistingApiKey();
+        }
+    }
+
+    checkExistingApiKey() {
+        const key = localStorage.getItem('geminiApiKey');
+        if (key) {
+            this.apiKeyInput.value = key;
+            this.apiSetupCard.classList.add('collapsed');
+        }
+    }
+
+    handleApiKeySave(e) {
+        e.preventDefault();
+        const key = this.apiKeyInput.value.trim();
+        if (key) {
+            localStorage.setItem('geminiApiKey', key);
+            this.apiStatus.textContent = "✅ API key saved!";
+            this.apiStatus.className = 'api-status success';
+            this.apiStatus.classList.remove('hidden');
+            setTimeout(() => {
+                if (this.apiSetupCard) this.apiSetupCard.classList.add('collapsed');
+                this.apiStatus.classList.add('hidden');
+            }, 1500);
+        }
     }
 
     setLoadingState(isLoading) {

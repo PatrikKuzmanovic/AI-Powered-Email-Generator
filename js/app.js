@@ -31,7 +31,18 @@ class App {
         // Prevent multiple submissions
         if (this.ui.generateBtn.disabled) return;
         
-        // 1. Gather form data
+        // 1. Check API key first
+        const apiKey = localStorage.getItem('geminiApiKey');
+        if (!apiKey) {
+            alert("Please enter your Gemini API key in the setup section first!");
+            const apiCardDiv = document.getElementById('api-setup-card');
+            const apiInput = document.getElementById('api-key-input');
+            if (apiCardDiv) apiCardDiv.classList.remove('collapsed');
+            if (apiInput) apiInput.focus();
+            return;
+        }
+        
+        // 2. Gather form data
         const formData = new FormData(this.ui.form);
         const data = Object.fromEntries(formData.entries());
         
@@ -39,8 +50,8 @@ class App {
         this.ui.setLoadingState(true);
         
         try {
-            // Call the Gemini API
-            const generatedContent = await this.api.generateEmail(data);
+            // Call the Gemini API explicitly with user's key
+            const generatedContent = await this.api.generateEmail(data, apiKey);
             
             // 3. Display the form data alongside response
             this.ui.displayGeneratedEmail(generatedContent.subject, generatedContent.body, data);
